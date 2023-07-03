@@ -28,10 +28,30 @@ function App() {
     setContacts((contacts) => [...contacts, randomContact]);
   };
 
+  const deleteContact = (contactId) => {
+    const filteredContacts = contacts.filter(contact => contact.id !== contactId);
+    setContacts(filteredContacts);
+  };
+
+  const sortByPopularity = () => {
+    const sortedByPopularityContacts = [...contacts];
+    sortedByPopularityContacts.sort((a, b) => b.popularity - a.popularity);
+    setContacts(sortedByPopularityContacts);
+  };
+
+  const sortByName = () => {
+    const sortedByNameContacts = [...contacts];
+    sortedByNameContacts.sort((a, b) => a.name.localeCompare(b.name));
+    setContacts(sortedByNameContacts);
+    console.log(contacts)
+  };
+
   return (
     <div>
       <h1 >IronContacts</h1>
       <button onClick={addRandomContact}>Add Random Contact</button>
+      <button onClick={sortByPopularity}>Sort by Popularity</button>
+      <button onClick={sortByName}>Sort by Name</button>
       <table>
         <thead>
           <tr>
@@ -40,6 +60,7 @@ function App() {
             <th>Popularity</th>
             <th>Won Oscar</th>
             <th>Won Emmy</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -76,6 +97,7 @@ function App() {
                 <td>{contact.popularity.toFixed(2)}</td>
                 <td>{displayOscar()}</td>
                 <td>{displayEmmy()}</td>
+                <td><button onClick={() => deleteContact(contact.id)}>Delete</button></td>
               </tr>
             )
 
