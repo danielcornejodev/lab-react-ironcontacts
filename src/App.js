@@ -28,6 +28,7 @@ function App() {
     setContacts((contacts) => [...contacts, randomContact]);
   };
 
+  //if this was contact.id === contactId it would basically only return the one that is being clicked in the callback. The !== flips it so that everything else is returned instead, which is what we want.
   const deleteContact = (contactId) => {
     const filteredContacts = contacts.filter(contact => contact.id !== contactId);
     setContacts(filteredContacts);
